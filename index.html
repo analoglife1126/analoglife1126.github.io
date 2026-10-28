@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="模拟人生的技术主页。清华大学电子信息硕士在读，记录 SHA-256 加速 IP、处理器设计与嵌入式硬件项目。">
+  <meta name="theme-color" content="#660874">
+  <title>模拟人生 analoglife · 数字 IC 与硬件设计</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳转到正文</a>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="主导航">
+      <a class="brand" href="#home" aria-label="模拟人生，返回首页"><span class="brand-icon">A<span>.</span></span><span>模拟人生<span class="brand-divider">/</span><span class="brand-en">PORTFOLIO</span></span></a>
+      <button class="menu-toggle" type="button" aria-label="展开导航" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
+      <div class="nav-links" id="nav-links"><a href="#projects">项目</a><a href="#about">关于</a><a href="#experience">经历</a><a href="#contact">联系</a><a class="nav-resume" href="assets/analoglife-profile.pdf" target="_blank" rel="noopener">查看简历 <span aria-hidden="true">↗</span></a></div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="home" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="tiny-dot"></span> DIGITAL IC & HARDWARE DESIGN</div>
+        <h1 id="hero-title">你好，我是<span class="name">模拟人生<span class="name-period">。</span></span></h1>
+        <p class="hero-en">analoglife</p>
+        <p class="hero-role">数字 IC 设计与硬件系统</p>
+        <p class="hero-intro">清华大学电子信息硕士在读。<br>关注处理器、密码算法加速与数字系统设计，<br class="desktop-break">在这里记录项目、设计选择与验证结果。</p>
+        <div class="hero-actions"><a class="button primary" href="#projects">探索我的项目 <span aria-hidden="true">↘</span></a><a class="button quiet" href="assets/analoglife-profile.pdf" target="_blank" rel="noopener">查看简历 <span aria-hidden="true">↗</span></a></div>
+        <div class="hero-affiliation"><img src="assets/tsinghua-seal.svg" width="31" height="31" alt="清华大学校徽"><div>清华大学<span>深圳国际研究生院 · 电子信息</span></div><span class="affiliation-location">深圳，中国</span></div>
+      </div>
+
+      <div class="hero-visual" aria-label="SHA-256 IP 数据流架构示意图">
+        <div class="diagram-top"><span class="mono">DESIGN NOTE / 001</span><span class="diagram-indicator"><i></i> SHA-256 IP</span></div>
+        <svg class="architecture" viewBox="0 0 510 350" role="img" aria-labelledby="arch-title arch-desc">
+          <title id="arch-title">SHA-256 IP 的控制和数据流</title><desc id="arch-desc">APB 接口连接配置和任务控制；AXI 读数据经 DMA 和 FIFO 送入 SHA-256 计算核心；任务控制协调各个模块。</desc>
+          <defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="0.7" fill="#d8cadc"/></pattern><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7" fill="none" stroke="#8e6495" stroke-width="1"/></marker></defs>
+          <rect x="0" y="0" width="510" height="350" fill="url(#grid)"/>
+          <g fill="none" stroke="#b09ab5" stroke-width="1.5" marker-end="url(#arrow)"><path d="M80 86H140"/><path d="M238 86H302"/><path d="M351 115V170H199V213" stroke-dasharray="4 4"/><path d="M365 115V154H428V213" stroke-dasharray="4 4"/><path d="M90 250H130"/><path d="M230 250H270"/><path d="M350 250H382"/></g>
+          <g font-family="system-ui, sans-serif" text-anchor="middle"><text x="51" y="81" fill="#76627b" font-size="12">APB</text><text x="51" y="99" fill="#aa95af" font-size="10">配置</text><text x="50" y="245" fill="#76627b" font-size="12">AXI</text><text x="50" y="263" fill="#aa95af" font-size="10">32 bit</text>
+          <rect x="140" y="58" width="98" height="57" rx="9" fill="#fff" stroke="#d6c5dc"/><text x="189" y="82" fill="#54325f" font-size="13">配置寄存器</text><text x="189" y="100" fill="#a38da8" font-size="10">CONFIG</text>
+          <rect x="302" y="58" width="112" height="57" rx="9" fill="#fff" stroke="#d6c5dc"/><text x="358" y="82" fill="#54325f" font-size="13">任务控制</text><text x="358" y="100" fill="#a38da8" font-size="10">CONTROL</text>
+          <rect x="130" y="213" width="100" height="74" rx="10" fill="#fff" stroke="#d6c5dc"/><text x="180" y="244" fill="#54325f" font-size="15">DMA</text><text x="180" y="265" fill="#a38da8" font-size="11">读请求与接收</text>
+          <rect x="270" y="213" width="80" height="74" rx="10" fill="#fff" stroke="#d6c5dc"/><text x="310" y="244" fill="#54325f" font-size="15">FIFO</text><text x="310" y="265" fill="#a38da8" font-size="11">16 × 32 bit</text>
+          <rect x="382" y="194" width="102" height="112" rx="12" fill="#660874"/><rect x="389" y="201" width="88" height="98" rx="8" fill="none" stroke="#a366ad" stroke-width="0.7"/><text x="433" y="239" fill="#fff" font-size="14">SHA-256</text><text x="433" y="259" fill="#e4c5e9" font-size="11">计算核心</text><text x="433" y="281" fill="#b787c0" font-size="9">256-bit digest</text>
+          <text x="275" y="182" fill="#a28aaa" font-size="10">任务协调</text></g>
+          <g stroke="#a366ad" stroke-width="2"><path d="M397 187V194m16-7v7m16-7v7m16-7v7m16-7v7M397 306v7m16-7v7m16-7v7m16-7v7m16-7v7M375 214h7m-7 17h7m-7 17h7m-7 17h7m-7 17h7M484 214h7m-7 17h7m-7 17h7m-7 17h7m-7 17h7"/></g>
+        </svg>
+        <div class="diagram-bottom"><span>从算法建模到 RTL 实现</span><span class="mono">512 bit → 256 bit</span></div>
+        <div class="diagram-note"><span class="note-mark">↳</span> 一次设计，一条完整的验证链路。</div>
+      </div>
+    </section>
+
+    <div class="discipline-band"><div class="wrap discipline-inner"><span class="discipline-label">DESIGN FOCUS</span><span>RTL 设计</span><i></i><span>架构优化</span><i></i><span>功能验证</span><i></i><span>时序分析</span><i></i><span>板级联调</span></div></div>
+
+    <section class="projects section wrap" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading"><div><span class="section-index">01 / SELECTED WORK</span><h2 id="projects-title">设计与实践<span class="serif-dot">.</span></h2></div><p>从计算核心，到完整系统。<br>每个项目，都有具体的问题和设计取舍。</p></div>
+      <article class="featured-project">
+        <div class="project-topline"><span class="project-category"><span class="tiny-dot"></span> 数字 IC · 代表项目</span><span class="project-date">2026.10</span></div>
+        <div class="featured-intro"><div><h3>SHA-256 加速 IP<br><span>设计、验证与架构优化</span></h3><p>围绕软件填充后的多分组消息，实现计算核心、FIFO、APB 配置和 AXI DMA，并比较同一时钟条件下的结构取舍。</p></div><span class="project-serial" aria-hidden="true">01</span></div>
+        <div class="tags inverse"><span>Verilog</span><span>MATLAB</span><span>APB / AXI</span><span>TSMC 90 nm</span></div>
+        <div class="project-metrics"><div><span class="metric-value">66 <b>→</b> 34<small>周期</small></span><span class="metric-label">计算核心启动间隔</span></div><div><span class="metric-value">+94.1<small>%</small></span><span class="metric-label">理论核内稳态吞吐率</span></div><div><span class="metric-value">200<small>MHz</small></span><span class="metric-label">统一比较时钟频率</span></div></div>
+        <details class="project-details"><summary><span>看看设计过程与比较结果</span><span class="detail-symbol" aria-hidden="true">+</span></summary><div class="details-content"><div class="detail-columns"><div><h4>系统如何协同</h4><p>APB 写入地址、长度并启动任务；DMA 经 AXI 读取消息，FIFO 缓冲总线和计算节奏；计算核心逐分组更新链值，最终摘要通过配置寄存器读取。</p></div><div><h4>优化如何衡量</h4><p>在单轮迭代基础上尝试 W/K 提前准备、分段累加和两轮部分展开。固定时钟与工艺库，对照启动间隔、映射单元面积和布局前时序结果。</p></div></div><div class="comparison"><div class="comparison-row"><span>原始单轮结构</span><div class="bar-track"><div class="bar bar-base"></div></div><strong>193.9 <small>MB/s</small></strong></div><div class="comparison-row"><span>两轮部分展开</span><div class="bar-track"><div class="bar bar-optimized"></div></div><strong>376.5 <small>MB/s</small></strong></div></div><p class="measurement-note">条件：TSMC 90 nm、200 MHz；吞吐率按 64 字节 × 频率 ÷ 启动间隔计算，属于理想输入条件下的核内稳态上限。完整 IP 的映射单元面积由 81,176.46 增至 100,560.00 μm²，增加 23.9%；并非芯片版图面积。</p><div class="verification-chain"><span>参考模型比对</span><b>→</b><span>RTL 仿真</span><b>→</b><span>Lint</span><b>→</b><span>DC 综合</span><b>→</b><span>PT 时序分析</span><b>→</b><span>SDF 门级仿真</span></div></div></details>
+      </article>
+
+      <div class="project-grid">
+        <article class="project-card"><div class="card-topline"><span class="card-icon" aria-hidden="true"><svg viewBox="0 0 40 40"><rect x="10" y="10" width="20" height="20" rx="3"/><rect x="15" y="15" width="10" height="10" rx="1"/><path d="M15 5v5m10-5v5M15 30v5m10-5v5M5 15h5m-5 10h5m20-10h5m-5 10h5"/></svg></span><span class="project-date">2026.02 — 2026.05</span></div><span class="card-eyebrow">PROCESSOR / FPGA</span><h3>单周期处理器<br>与 ZYNQ 协同验证</h3><p>实现 32 位 DISD 精简指令集，以阶乘和冒泡排序程序验证，在 ZYNQ-7020 上打通 PL 计算、PS 读取与 UART 输出。</p><div class="tags"><span>Verilog</span><span>ZYNQ-7020</span><span>MMIO</span></div><details class="card-details"><summary>设计要点 <span aria-hidden="true">↗</span></summary><div><p>针对同步 BRAM 引起的单周期取指、访存错位，采用分布式 RAM 异步读。通过 FlagWrite 状态保护和结果打包，处理标志位覆盖及 PS/PL 速率差异。</p><p>完成 ISA、RTL、Testbench 与板级软硬件联调。</p></div></details></article>
+        <article class="project-card"><div class="card-topline"><span class="card-icon green" aria-hidden="true"><svg viewBox="0 0 40 40"><rect x="7" y="8" width="26" height="24" rx="3"/><rect x="13" y="14" width="10" height="10" rx="1"/><path d="M27 13v13M13 28h10M4 14h3m-3 8h3M33 15h3m-3 9h3"/></svg></span><span class="project-date">2024.05 — 2025.07</span></div><span class="card-eyebrow">EMBEDDED / HARDWARE</span><h3>振镜伺服<br>驱动系统硬件设计</h3><p>负责 6 层信号板与 4 层功率板，从需求、器件选型和原理图到 PCB、投产和测试，参与完整板卡研发流程。</p><div class="tags"><span>嵌入式硬件</span><span>PCB 设计</span><span>系统调试</span></div><details class="card-details"><summary>设计要点 <span aria-hidden="true">↗</span></summary><div><p>与嵌入式软件和结构工程师协作，在板卡面积缩小 15% 的基础上，解决振镜电机编码器反馈信号不同步的问题。</p><p>这段板级设计经历，也让我更重视接口协同、调试路径与系统验证。</p></div></details></article>
+      </div>
+    </section>
+
+    <section class="about-section" id="about" aria-labelledby="about-title"><div class="wrap section about-grid"><div><span class="section-index">02 / ABOUT ME</span><h2 id="about-title">从板级硬件，<br>走向数字芯片<span class="serif-dot">.</span></h2><p class="about-lead">我喜欢把问题拆开，也喜欢把系统连起来。</p></div><div class="about-copy"><p>我曾从事嵌入式硬件研发，目前在清华大学深圳国际研究生院攻读电子信息硕士，逐步将关注点转向数字 IC 前端设计。</p><p>从算法建模、微架构划分到 RTL 与验证，我希望每个设计选择都有依据，每项性能结论都有对应的实验条件。这个网站用来整理项目，也记录我仍在学习的问题。</p><a class="text-link" href="https://github.com/analoglife1126" target="_blank" rel="noopener">在 GitHub 找到我 <span aria-hidden="true">↗</span></a></div></div></section>
+
+    <section class="skills section wrap" aria-labelledby="skills-title"><div class="section-heading compact"><div><span class="section-index">TOOLKIT</span><h2 id="skills-title">工具与方法<span class="serif-dot">.</span></h2></div><span class="section-aside">在具体项目中学习和使用</span></div><div class="skill-grid"><div><span class="skill-number">01</span><h3>数字设计</h3><p>Verilog · 状态机 · FIFO<br>APB · AXI · RTL 集成</p></div><div><span class="skill-number">02</span><h3>算法建模</h3><p>MATLAB<br>算法拆解 · 参考模型 · 结果比对</p></div><div><span class="skill-number">03</span><h3>仿真验证</h3><p>ModelSim · VCS · Verdi<br>Testbench · 波形调试 · 门级仿真</p></div><div><span class="skill-number">04</span><h3>前端实现</h3><p>SpyGlass · Design Compiler<br>PrimeTime · 综合约束 · 布局前 STA</p></div></div></section>
+
+    <section class="experience-section wrap section" id="experience" aria-labelledby="experience-title"><div class="experience-intro"><span class="section-index">03 / EXPERIENCE</span><h2 id="experience-title">一路学习，<br>一路实践<span class="serif-dot">.</span></h2><p>教育背景与工作经历</p></div><div class="timeline"><article><span class="timeline-dot current"></span><time>2025.09 — 2028.06（预计）</time><h3>清华大学</h3><p class="timeline-role">深圳国际研究生院 · 电子信息硕士</p><p>数字集成系统设计、数字大规模集成电路、模拟大规模集成电路。</p></article><article><span class="timeline-dot"></span><time>2024.05 — 2025.07</time><h3>江苏昆仑精密科技有限公司</h3><p class="timeline-role">嵌入式硬件工程师</p><p>振镜伺服驱动系统；信号板、功率板设计与联调。</p></article><article><span class="timeline-dot"></span><time>2019.09 — 2023.06</time><h3>华中科技大学</h3><p class="timeline-role">光电信息科学与工程学士</p><p>模拟电子技术、数字电路与逻辑设计、嵌入式项目实践。</p></article></div></section>
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-title"><div class="wrap contact-inner"><div><span class="section-index">04 / GET IN TOUCH</span><h2 id="contact-title">欢迎交流设计，<br>也欢迎新的机会<span class="serif-dot">.</span></h2><p>数字 IC 前端设计 · 处理器 · 算法加速 · 嵌入式硬件</p></div><div class="contact-actions"><a class="email-link" href="mailto:15926391043@163.com">15926391043@163.com <span aria-hidden="true">↗</span></a><div><button class="copy-email" type="button" data-email="15926391043@163.com">复制邮箱 <span aria-hidden="true">⧉</span></button><a href="https://github.com/analoglife1126" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a><a href="assets/analoglife-profile.pdf" target="_blank" rel="noopener">简历 PDF <span aria-hidden="true">↗</span></a></div><p class="copy-status" role="status" aria-live="polite"></p></div></div></section>
+  </main>
+  <footer class="wrap site-footer"><span>© <span id="year">2026</span> 模拟人生 · analoglife</span><span>认真设计，持续学习。</span><a href="#home">回到顶部 <span aria-hidden="true">↑</span></a></footer>
+  <script src="assets/main.js"></script>
+</body>
+</html>
