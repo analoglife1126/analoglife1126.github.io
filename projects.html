@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="analoglife 的学习与设计记录：数字 IC、处理器、硬件系统的笔记与项目实践。">
+  <meta name="theme-color" content="#ffffff">
+  <title>项目实践 · analoglife</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="analoglife-page" data-theme="light" data-current-page="projects">
+  <canvas class="branch-art" aria-hidden="true"></canvas>
+  <a class="skip" href="#main">跳转到正文</a>
+  <header class="site-header"><nav class="site-nav" aria-label="主导航">
+    <a href="index.html" data-page="home" class="brand" aria-label="analoglife 首页"><span class="signature" aria-hidden="true">al</span></a>
+    <div class="nav-links"><a href="notes.html" data-page="notes"><i data-lucide="notebook-pen" aria-hidden="true"></i><span>笔记</span></a><a href="projects.html" data-page="projects" aria-current="page"><i data-lucide="cpu" aria-hidden="true"></i><span>项目</span></a><a href="about.html" data-page="about"><i data-lucide="user-round" aria-hidden="true"></i><span>关于</span></a><button class="theme-toggle" type="button" aria-label="切换为深色外观" aria-pressed="false"><i data-lucide="sun" class="light-theme-icon" aria-hidden="true"></i><i data-lucide="moon" class="dark-theme-icon" aria-hidden="true"></i><span class="theme-label">深色</span></button></div>
+  </nav></header>
+  <main class="reading-width" id="main"><header class="page-heading"><h1>项目实践<span class="page-en">Projects</span></h1><p>从计算核心到完整系统，记录设计、验证与取舍。</p></header>
+<div class="project-records">
+<article class="project-record" id="project-sha256"><p class="project-kind">数字 IC · 算法加速</p><h2>SHA-256 加速 IP</h2><p class="project-overview">实现从消息读取到摘要输出的完整数据通路，并比较计算核心的架构选择。</p><ul class="project-points"><li>实现计算核心、FIFO、APB 配置与 AXI DMA，由任务控制协调分组计算。</li><li>比较 W/K 提前准备、分段累加与两轮部分展开；串联参考模型、RTL 仿真、Lint、综合、时序分析和 SDF 门级仿真。</li><li>在 TSMC 90 nm、200 MHz 的统一条件下，核心启动间隔由 66 缩短至 34 周期，理论核内稳态吞吐率由 193.9 增至 376.5 MB/s。</li></ul><p class="project-caveat">取舍：完整 IP 的布局前映射单元面积增加 23.9%；吞吐率为理想输入下的核内上限。</p><ul class="tech-labels" aria-label="使用的技术"><li>Verilog</li><li>MATLAB</li><li>APB / AXI</li><li>Design Compiler</li><li>PrimeTime</li></ul><details class="project-details" id="details-sha256"><summary>设计与验证细节<span class="note-sign" aria-hidden="true">+</span></summary><div class="essay-body"><p>围绕软件填充后的多分组消息，实现计算核心、FIFO、APB 配置与 AXI DMA，并在统一时钟和工艺条件下比较架构取舍。</p><h4>系统协同</h4><p>APB 配置消息地址、长度并启动任务；DMA 经 AXI 读取消息，FIFO 缓冲总线和计算节奏；计算核心逐分组更新链值，最终摘要通过配置寄存器读取。</p>
+              <h4>架构比较</h4><p>在单轮迭代基础上尝试 W/K 提前准备、分段累加和两轮部分展开，对照启动间隔、映射单元面积和布局前时序结果。</p>
+              <div class="table-scroll"><table><caption>统一条件下的结构比较</caption><thead><tr><th scope="col">结构</th><th scope="col">启动间隔</th><th scope="col">理论核内吞吐率</th></tr></thead><tbody><tr><th scope="row">原始单轮结构</th><td>66 周期</td><td>193.9 MB/s</td></tr><tr><th scope="row">两轮部分展开</th><td>34 周期</td><td>376.5 MB/s</td></tr></tbody></table></div>
+              <p class="measurement-note">比较条件：TSMC 90 nm、200 MHz。吞吐率按 64 字节 × 频率 ÷ 启动间隔计算，为理想输入条件下的核内稳态上限。完整 IP 的布局前映射单元面积由 81,176.46 增至 100,560.00 μm²，增加 23.9%。</p>
+              <p class="verification">参考模型比对 → RTL 仿真 → Lint → DC 综合 → PT 时序分析 → SDF 门级仿真</p><p class="article-tools">Verilog · MATLAB · APB / AXI · TSMC 90 nm</p></div></details></article>
+<article class="project-record" id="project-processor"><p class="project-kind">处理器 · FPGA</p><h2>单周期处理器与 ZYNQ 协同验证</h2><p class="project-overview">围绕 32 位 DISD 精简指令集，实现处理器并完成板级软硬件联调。</p><ul class="project-points"><li>完成 ISA、RTL 与 Testbench，通过阶乘和冒泡排序程序验证功能。</li><li>针对同步 BRAM 的取指和访存延迟错位，采用分布式 RAM 异步读。</li><li>通过 FlagWrite 状态保护与结果打包，处理标志位覆盖和 PS / PL 速率差异，打通 PL 计算、PS 读取与 UART 输出。</li></ul><ul class="tech-labels" aria-label="使用的技术"><li>Verilog</li><li>ZYNQ-7020</li><li>MMIO</li><li>Testbench</li></ul><details class="project-details" id="details-processor"><summary>设计与验证细节<span class="note-sign" aria-hidden="true">+</span></summary><div class="essay-body"><p>实现 32 位 DISD 精简指令集，以阶乘和冒泡排序程序验证，在 ZYNQ-7020 上打通 PL 计算、PS 读取与 UART 输出。</p><p>针对同步 BRAM 引起的单周期取指、访存错位，采用分布式 RAM 异步读。通过 FlagWrite 状态保护和结果打包，处理标志位覆盖及 PS/PL 速率差异。</p><p>完成 ISA、RTL、Testbench 与板级软硬件联调。</p><p class="article-tools">Verilog · ZYNQ-7020 · MMIO</p></div></details></article>
+<article class="project-record" id="project-servo"><p class="project-kind">嵌入式 · 板级硬件</p><h2>振镜伺服驱动系统</h2><p class="project-overview">围绕信号采集、功率驱动与反馈链路，完成多层板设计和系统调试。</p><ul class="project-points"><li>负责 6 层信号板与 4 层功率板，覆盖需求、器件选型、原理图、PCB、投产和测试。</li><li>结合嵌入式软件进行软硬件联调，处理电机编码器反馈信号不同步的问题。</li><li>在完整板卡研发流程中梳理接口时序、反馈链路与测试方法。</li></ul><ul class="tech-labels" aria-label="使用的技术"><li>PCB 设计</li><li>信号采集</li><li>功率驱动</li><li>系统联调</li></ul><details class="project-details" id="details-servo"><summary>设计与验证细节<span class="note-sign" aria-hidden="true">+</span></summary><div class="essay-body"><p>围绕信号采集与功率驱动，完成多层板设计、器件选型、原理图、PCB 与板级测试，关注接口协同和系统调试。</p><p>采用 6 层信号板与 4 层功率板，结合嵌入式软件进行软硬件联调，处理编码器反馈信号不同步的问题。</p><p>通过完整板卡研发流程，梳理接口时序、反馈链路和测试方法。</p><p class="article-tools">嵌入式硬件 · PCB 设计 · 系统调试</p></div></details></article></div></main>
+  <footer class="reading-width site-footer"><span>© <span id="year">2026</span> analoglife</span><span>学习，实践，记录。</span></footer>
+</div>
+<script async src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js" onload="lucide.createIcons({attrs:{width:18,height:18}})"></script>
+<script src="assets/main.js"></script>
+</body>
+</html>
